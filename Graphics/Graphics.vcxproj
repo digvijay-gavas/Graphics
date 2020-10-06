@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{D6AED02B-BC44-4E58-8C92-5BC5D9A9F534}</ProjectGuid>
-    <RootNamespace>Graphcs</RootNamespace>
+    <RootNamespace>Graphics</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
