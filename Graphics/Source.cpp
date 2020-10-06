@@ -1,11 +1,5 @@
-/******************************
- *
- * Example "Square"
- * created by Syd
- *
- *******************************/
 
-#include <GL/glew.h>
+/*#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <cstdlib>
 #include <iostream>
@@ -37,10 +31,11 @@ static void RenderScene(GLFWwindow* window, float delta) {
 	glColor3f(1, 1, 1);
 
 	glBegin(GL_LINE_LOOP);
-	glVertex2f(0.25, 0.25);
-	glVertex2f(0.75, 0.25);
+	glVertex2f(0.0, 0.0);
+	glVertex2f(0.75, 0.0);
 	glVertex2f(0.75, 0.75);
-	glVertex2f(0.25, 0.75);
+	glVertex2f(0.0, 0.75);
+	glVertex2f(0.75, 0.0);
 	glEnd();
 	glFlush();
 }
@@ -90,12 +85,16 @@ int main(int argc, char** argv) {
 	glfwSetCursorPosCallback(window, MouseMotionCallback);
 	while (!glfwWindowShouldClose(window)) {
 		float delta = glfwGetTime();
+
 		Update(window, delta);
 		RenderScene(window, delta);
+
+
+
 		glfwSetTime(0);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
 	glfwDestroyWindow(window);
 	return 0;
-}
+}*/
