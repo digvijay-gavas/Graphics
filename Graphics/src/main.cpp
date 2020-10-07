@@ -4,9 +4,11 @@
 #include <cstdlib>
 #include <iostream>
 #include <math.h> 
+#include "business.objects/Camera.h"
+#include "business.objects.geometry/Point.h"
 
-static int WIDTH = 640;
-static int HEIGHT = 480;
+static int WIDTH = 1024;
+static int HEIGHT = 768;
 double PI = 3.1415;
 double trans = 0;
 float rotatex = 0, rotatey = 0, mouseX = 0, mouseY = 0;
@@ -68,6 +70,38 @@ int main(int argc, char** argv) {
 	glfwInit();
 	window = glfwCreateWindow(WIDTH, HEIGHT, argv[0], NULL, NULL);
 	glfwMakeContextCurrent(window);
+	Resize(window, WIDTH, HEIGHT);
+	Camera camera = Camera(window);
+	camera.setAt(Point(0,0,10));
+	camera.lookAt(Point(20, 0, 0));
+	camera.zoom(45);
+
+	glClearColor(0.0, 0.0, 0.2, 1.0);
+
+	while (!glfwWindowShouldClose(window))
+	{
+		glColor3f(1.0, 0.0, 0.0); // red x
+		glBegin(GL_LINES);
+		// x aix
+
+		glVertex3f(-40.0, 0.0f, 0.0f);
+		glVertex3f(40.0, 0.0f, 0.0f);
+
+		// arrow
+		glVertex3f(40.0, 0.0f, 0.0f);
+		glVertex3f(30.0, 10.0f, 0.0f);
+
+		glVertex3f(40.0, 0.0f, 0.0f);
+		glVertex3f(30.0, -10.0f, 0.0f);
+		glEnd();
+		glFlush();
+
+		glfwSetTime(0);
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
+
+	getchar();
 	Resize(window, WIDTH, HEIGHT);
 	//glViewport(0, 0, 500, 500);
 	//glMatrixMode(GL_PROJECTION);
