@@ -138,12 +138,14 @@
     <ClCompile Include="src\business.objects.geometry\Vector.cpp" />
     <ClCompile Include="src\business.objects.geometry\Point.cpp" />
     <ClCompile Include="src\business.objects\Camera.cpp" />
+    <ClCompile Include="src\event.handlers\InputHandler.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\business.objects.geometry\Vector.h" />
     <ClCompile Include="src\business.objects.geometry\Point.h" />
     <ClInclude Include="src\business.objects\Camera.h" />
+    <ClInclude Include="src\event.handlers\InputHandler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

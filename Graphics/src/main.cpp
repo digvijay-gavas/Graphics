@@ -4,8 +4,15 @@
 #include <cstdlib>
 #include <iostream>
 #include <math.h> 
+
+
 #include "business.objects/Camera.h"
 #include "business.objects.geometry/Point.h"
+#include "event.handlers/InputHandler.h"
+
+#include <chrono>
+#include <thread>
+using namespace std::chrono_literals;
 
 static int WIDTH = 1024;
 static int HEIGHT = 768;
@@ -25,39 +32,53 @@ float  distance1;
 
 int main(int argc, char** argv) {
 	GLFWwindow* window;
+	float zoom = 5;
 
 	glfwInit();
 	window = glfwCreateWindow(WIDTH, HEIGHT, argv[0], NULL, NULL);
 	glfwMakeContextCurrent(window);
 
-	Camera camera = Camera(window,HEIGHT,WIDTH);
+	Camera camera = Camera(HEIGHT,WIDTH);
 	camera.setAt(Point(0, 0, 10));
-	camera.lookAt(Point(20, 0, 0));
-	camera.zoom(45);
+	camera.lookAt(Point(0, 0, 0));
+	//camera.zoom(zoom);
+
+	InputHandler::window = window;
+	InputHandler::camera = camera;
+	int a=InputHandler::init();
+	
 
 	glClearColor(0.0, 0.0, 0.2, 1.0);
+	
 
 	while (!glfwWindowShouldClose(window))
 	{
+		glClearColor(0.0, 0.0, 0.0, 1.0);
+		glClear(GL_COLOR_BUFFER_BIT);
+
 		glColor3f(1.0, 0.0, 0.0); // red x
 		glBegin(GL_LINES);
-		// x aix
-
-		glVertex3f(-40.0, 0.0f, 0.0f);
-		glVertex3f(40.0, 0.0f, 0.0f);
-
-		// arrow
-		glVertex3f(40.0, 0.0f, 0.0f);
-		glVertex3f(30.0, 10.0f, 0.0f);
-
-		glVertex3f(40.0, 0.0f, 0.0f);
-		glVertex3f(30.0, -10.0f, 0.0f);
+		glVertex3f(-1.0, 0.0f, 0.0f); glVertex3f(1.0, 0.0f, 0.0f);// x aix
+		glVertex3f(1.0, 0.0f, 0.0f);glVertex3f(0.3, 0.1f, 0.0f); glVertex3f(1.0, 0.0f, 0.0f); glVertex3f(0.3, -0.1f, 0.0f);// arrow
 		glEnd();
+
+		glColor3f(0.0, 1.0, 0.0); // green x
+		glBegin(GL_LINES);
+		glVertex3f(0.0, -1.0f, 0.0f); glVertex3f(0.0, 1.0f, 0.0f);// x aix
+		glVertex3f(0.0f, 1.0, 0.0f); glVertex3f(0.1f,  0.3,  0.0f); glVertex3f(0.0f,  1.0,  0.0f); glVertex3f(-0.1f, 0.3, 0.0f);// arrow
+		glEnd();
+
+		glColor3f(0.0, 0.0, 1.0); // blue x
+		glBegin(GL_LINES);
+		glVertex3f(-1.0, 0.0f, 0.0f); glVertex3f(1.0, 0.0f, 0.0f);// x aix
+		glVertex3f(1.0, 0.0f, 0.0f); glVertex3f(0.3, 0.1f, 0.0f); glVertex3f(1.0, 0.0f, 0.0f); glVertex3f(0.3, -0.1f, 0.0f);// arrow
+		glEnd();
+		
 		glFlush();
 
-		glfwSetTime(0);
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+		std::this_thread::sleep_for(10ms);
 	}
 	glfwDestroyWindow(window);
 	return 0;

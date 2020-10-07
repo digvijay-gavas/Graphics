@@ -30,6 +30,12 @@
     <ClCompile Include="src\business.objects.geometry\Point.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\business.objects.geometry\Point.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\event.handlers\InputHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\business.objects\Camera.h">
@@ -38,7 +44,7 @@
     <ClInclude Include="src\business.objects.geometry\Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\business.objects.geometry\Point.h">
+    <ClInclude Include="src\event.handlers\InputHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

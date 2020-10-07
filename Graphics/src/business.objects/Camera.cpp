@@ -1,42 +1,23 @@
 #include "Camera.h";
 
 
-Camera::Camera(GLFWwindow* window,float height, float width): eye(0,0,10),look(0,0,0),up(0,1,0)
+Camera::Camera(float height, float width) : eye(0, 0, 10), look(0, 0, 0), up(0, 1, 0)
 {
-	this->window = window;
 	this->height = height;
 	this->width = width;
 	this->aspectRatio = this->height / this->width;
-	
-
-	glfwSetWindowSizeCallback  (window, Camera::resizeCallback);
-	glfwSetKeyCallback         (window, Camera::keyCallback);
-	glfwSetMouseButtonCallback (window, Camera::mouseClickCallback);
-	glfwSetCursorPosCallback   (window, Camera::cursorPosCallback);
 }
 
 void Camera::update()
 {
 	this->aspectRatio = this->height / this->width;
+	
+
+	glLoadIdentity();
 	gluPerspective(this->fieldOfview, this->aspectRatio, 0.1, 1000);
 	gluLookAt(eye.x, eye.y, eye.z, look.x, look.y, look.z, up.i, up.j, up.k);
 }
-void Camera::resizeCallback(GLFWwindow* window, int w, int h)
-{
-	std::cout << "resizeCallback: w" << w << ", h " << h << std::endl;
-}
-void Camera::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	std::cout << "keyCallback: key" << key << ", scancode " << scancode << ", action " << action << ", mods " << mods << std::endl;
-}
-void Camera::mouseClickCallback(GLFWwindow* window, int button, int action, int mods)
-{
-	std::cout << "mouseClickCallback: button" << button << ", action " << action << ", mods " << mods << std::endl;
-}
-void Camera::cursorPosCallback(GLFWwindow* window, double x, double y)
-{
-	std::cout << "cursorPosCallback: x" << x << ", y " << y << std::endl;
-}
+
 
 
 void Camera::pan(GLdouble x,GLdouble y)
@@ -46,8 +27,33 @@ void Camera::pan(GLdouble x,GLdouble y)
 	//gluLookAt(0.0f, 0.0f, 10, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 }
 
-void Camera::zoom(GLdouble angle)
+void Camera::zoom(GLdouble deltaAngle)
 {
+	
+	this->fieldOfview += deltaAngle*5;
+	if (this->fieldOfview > 180)
+		this->fieldOfview = 180;
+	else if (this->fieldOfview < 0)
+		this->fieldOfview = 0;
+	this->update();
+	std::cout << "fieldOfview: " << fieldOfview << std::endl;
+}
+void Camera::zoomIn()
+{
+	if (this->fieldOfview > 180)
+		this->fieldOfview = 180;
+	this->fieldOfview += 0.1 ;
+	this->update();
+	std::cout << "fieldOfview: " << fieldOfview << std::endl;
+}
+
+void Camera::zoomOut()
+{
+	if (this->fieldOfview < 0)
+		this->fieldOfview = 0;
+	this->fieldOfview -= 0.1;
+	this->update();
+	std::cout << "fieldOfview: " << fieldOfview << std::endl;
 }
 
 void Camera::setAt(GLdouble x, GLdouble y, GLdouble z)
