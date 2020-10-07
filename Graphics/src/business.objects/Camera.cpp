@@ -1,9 +1,13 @@
 #include "Camera.h";
 
 
-Camera::Camera(GLFWwindow* window): eye(0,0,10),look(0,0,0),up(0,1,0)
+Camera::Camera(GLFWwindow* window,float height, float width): eye(0,0,10),look(0,0,0),up(0,1,0)
 {
 	this->window = window;
+	this->height = height;
+	this->width = width;
+	this->aspectRatio = this->height / this->width;
+	
 
 	glfwSetWindowSizeCallback  (window, Camera::resizeCallback);
 	glfwSetKeyCallback         (window, Camera::keyCallback);
@@ -13,6 +17,8 @@ Camera::Camera(GLFWwindow* window): eye(0,0,10),look(0,0,0),up(0,1,0)
 
 void Camera::update()
 {
+	this->aspectRatio = this->height / this->width;
+	gluPerspective(this->fieldOfview, this->aspectRatio, 0.1, 1000);
 	gluLookAt(eye.x, eye.y, eye.z, look.x, look.y, look.z, up.i, up.j, up.k);
 }
 void Camera::resizeCallback(GLFWwindow* window, int w, int h)
@@ -35,7 +41,9 @@ void Camera::cursorPosCallback(GLFWwindow* window, double x, double y)
 
 void Camera::pan(GLdouble x,GLdouble y)
 {
-	gluLookAt(0.0f, 0.0f, 10, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+	//gluPerspective(fieldOfview, aspectRatio, -1000, 1000);
+	//gluPerspective(25.0f, 1, 0.1f, 1000.0f);
+	//gluLookAt(0.0f, 0.0f, 10, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 }
 
 void Camera::zoom(GLdouble angle)

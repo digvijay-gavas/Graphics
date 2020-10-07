@@ -11,6 +11,10 @@ private:
 	GLFWwindow* window;
 	Point eye, look;
 	Vector up;
+	float fieldOfview = 25;
+	float aspectRatio = 1;
+	float height;
+	float width;
 
 	void update();
 	static void  resizeCallback(GLFWwindow* window, int w, int h);
@@ -19,7 +23,7 @@ private:
 	static void  cursorPosCallback(GLFWwindow* window, double x, double y);
 
 public:
-	Camera(GLFWwindow* window);
+	Camera(GLFWwindow* window, float height, float width);
 	void pan(GLdouble x, GLdouble y);
 	void zoom(GLdouble angle);
 	void setAt(GLdouble x, GLdouble y,GLdouble z);
