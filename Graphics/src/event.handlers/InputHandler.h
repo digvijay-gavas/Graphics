@@ -9,23 +9,27 @@
 class InputHandler
 {
 private:
+	static int button1Down;
+	static double dragX,dragY;
 public:
-	static int init() {
+	static void init() {
+		button1Down = 0;
 		glfwSetWindowSizeCallback(window, InputHandler::resizeCallback);
 		glfwSetKeyCallback(window, InputHandler::keyCallback);
 		glfwSetMouseButtonCallback(window, InputHandler::mouseClickCallback);
 		glfwSetCursorPosCallback(window, InputHandler::cursorPosCallback);
 		glfwSetScrollCallback(window, InputHandler::scrollCallback);
-		return 0;
 	};
 
 	static GLFWwindow* window;
 	static Camera camera;
-	static int __init;
 	static void  resizeCallback(GLFWwindow* window, int w, int h);
 	static void  keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	static void  mouseClickCallback(GLFWwindow* window, int button, int action, int mods);
 	static void  cursorPosCallback(GLFWwindow* window, double x, double y);
 	static void  scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
+
+	// derived event
+	static void  panCallback(GLFWwindow* window, double xoffset, double yoffset);
 
 };

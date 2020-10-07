@@ -38,14 +38,14 @@ int main(int argc, char** argv) {
 	window = glfwCreateWindow(WIDTH, HEIGHT, argv[0], NULL, NULL);
 	glfwMakeContextCurrent(window);
 
-	Camera camera = Camera(HEIGHT,WIDTH);
+	Camera camera = Camera(WIDTH, HEIGHT);
 	camera.setAt(Point(0, 0, 10));
 	camera.lookAt(Point(0, 0, 0));
 	//camera.zoom(zoom);
 
 	InputHandler::window = window;
 	InputHandler::camera = camera;
-	int a=InputHandler::init();
+	InputHandler::init();
 	
 
 	glClearColor(0.0, 0.0, 0.2, 1.0);
@@ -70,8 +70,8 @@ int main(int argc, char** argv) {
 
 		glColor3f(0.0, 0.0, 1.0); // blue x
 		glBegin(GL_LINES);
-		glVertex3f(-1.0, 0.0f, 0.0f); glVertex3f(1.0, 0.0f, 0.0f);// x aix
-		glVertex3f(1.0, 0.0f, 0.0f); glVertex3f(0.3, 0.1f, 0.0f); glVertex3f(1.0, 0.0f, 0.0f); glVertex3f(0.3, -0.1f, 0.0f);// arrow
+		glVertex3f( 0.0f, 0.0f, -1.0); glVertex3f( 0.0f, 0.0f, 1.0);// x aix
+		glVertex3f( 0.0f, 0.0f, 1.0); glVertex3f( 0.1f, 0.0f, 0.3); glVertex3f(0.0f, 0.0f, 1.0); glVertex3f( -0.1f, 0.0f, 0.3);// arrow
 		glEnd();
 		
 		glFlush();
