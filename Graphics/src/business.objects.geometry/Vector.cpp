@@ -14,6 +14,12 @@ Vector::Vector(double i, double j, double k)
 	this->j = j;
 	this->k = k;
 }
+Vector::Vector(Point p1, Point p2)
+{
+	this->i = p2.x - p1.x;
+	this->j = p2.y - p1.y;
+	this->k = p2.z - p1.z;
+}
 
 void Vector::rotate(double x, double y)
 {

@@ -21,6 +21,7 @@ public:
 	Camera() {};
 	void resize(float width, float height);
 	void pan(GLdouble x, GLdouble y);
+	void rotate(GLdouble x, GLdouble y);
 	void zoom(GLdouble deltaAngle);
 	void setAt(GLdouble x, GLdouble y,GLdouble z);
 	void setAt(Point eye);

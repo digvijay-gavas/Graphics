@@ -9,11 +9,14 @@
 class InputHandler
 {
 private:
-	static int button1Down;
+	static int button1Down, button2Down;
 	static double dragX,dragY;
+	static double rotateX;
+	static double rotateY;
 public:
 	static void init() {
 		button1Down = 0;
+		button2Down = 0;
 		glfwSetWindowSizeCallback(window, InputHandler::resizeCallback);
 		glfwSetKeyCallback(window, InputHandler::keyCallback);
 		glfwSetMouseButtonCallback(window, InputHandler::mouseClickCallback);
@@ -31,5 +34,6 @@ public:
 
 	// derived event
 	static void  panCallback(GLFWwindow* window, double xoffset, double yoffset);
+	static void  rotateCallback(GLFWwindow* window, double xoffset, double yoffset);
 
 };

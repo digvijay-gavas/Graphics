@@ -12,7 +12,7 @@ void Camera::update()
 {
 	this->aspectRatio = this->width / this->height;
 	glLoadIdentity();
-	gluPerspective(this->fieldOfview, this->aspectRatio, 0.1, 1000);
+	gluPerspective(this->fieldOfview, this->aspectRatio, 0, 1000);
 	gluLookAt(eye.x, eye.y, eye.z, look.x, look.y, look.z, up.i, up.j, up.k);
 }
 
@@ -33,16 +33,31 @@ void Camera::pan(GLdouble x,GLdouble y)
 	this->update();
 }
 
+void Camera::rotate(GLdouble x, GLdouble y)
+{
+	x /= 10;
+	eye.z -= x * sin(x/(eye.z-look.z));
+	eye.x += x;
+
+	y /= 10;
+	eye.z -= y * sin(y / (eye.z - look.z));
+	eye.y += y;
+	this->update();
+
+	Vector cameraVector = Vector(eye, look);
+	std::cout << "cameraVector:" << cameraVector.magnitude() << std::endl;
+}
+
 void Camera::zoom(GLdouble deltaAngle)
 {
 	
-	/*this->fieldOfview += deltaAngle*5;
+	this->fieldOfview += deltaAngle*5;
 	if (this->fieldOfview > 180)
 		this->fieldOfview = 180;
 	else if (this->fieldOfview < 0)
-		this->fieldOfview = 0;*/
-	eye.z += deltaAngle;
-	look.z += deltaAngle;
+		this->fieldOfview = 0;
+	//eye.z += deltaAngle;
+	//look.z += deltaAngle;
 	this->update();
 	//std::cout << "fieldOfview: " << fieldOfview << std::endl;
 }
